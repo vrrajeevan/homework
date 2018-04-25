@@ -5,7 +5,7 @@
 
 	<groupId>com.home.work</groupId>
 	<artifactId>JWTwork</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>JWT work</name>
@@ -22,7 +22,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-	</properties>
+		
+        <docker.image.prefix>jwtworkdocker</docker.image.prefix>
+</properties>
+	
 
 	<dependencies>
 		<dependency>
@@ -52,6 +55,13 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.16.20</version>
+    <scope>provided</scope>
+</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -60,7 +70,28 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+			 <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.2.3</version>
+            <configuration>
+               
+          <imageName>jwtworkdockerimage</imageName> <!-- image name should allways be small case -->
+                 <baseImage>java</baseImage>
+                 <dockerDirectory>target/docker</dockerDirectory> 
+                <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+            <!--  copy the service's jar file from target into the root directory of the image  -->
+               
+                <resources>
+                    <resource>
+                        <targetPath>/</targetPath>
+                        <directory>${project.build.directory}</directory>
+                        <include>${project.build.finalName}.jar</include>
+                    </resource>
+                </resources>
+            </configuration>
+        </plugin>
+		</plugins> 
 	</build>
 
 
