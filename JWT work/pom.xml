@@ -36,10 +36,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jersey</artifactId>
 		</dependency>
-		<dependency>
+		 <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+		</dependency> 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -61,6 +61,11 @@
     <version>1.16.20</version>
     <scope>provided</scope>
 </dependency>
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>runtime</scope>
+</dependency>
 		
 	</dependencies>
 
@@ -70,17 +75,17 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			 <plugin>
+			
+			<!-- <plugin>
             <groupId>com.spotify</groupId>
             <artifactId>docker-maven-plugin</artifactId>
             <version>0.2.3</version>
             <configuration>
-               
-          <imageName>jwtworkdockerimage</imageName> <!-- image name should allways be small case -->
+          <imageName>jwtworkdockerimage</imageName> image name should allways be small case
                  <baseImage>java</baseImage>
                  <dockerDirectory>target/docker</dockerDirectory> 
                 <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
-            <!--  copy the service's jar file from target into the root directory of the image  -->
+             copy the service's jar file from target into the root directory of the image 
                
                 <resources>
                     <resource>
@@ -90,7 +95,7 @@
                     </resource>
                 </resources>
             </configuration>
-        </plugin>
+        </plugin> -->
 		</plugins> 
 	</build>
 
