@@ -1,35 +1,54 @@
 package com.home.work.JWT.work.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.home.work.JWT.work.data.User;
-import com.home.work.JWT.work.data.intf.UserInterface;
+import com.home.work.JWT.work.data.UserInfo;
+import com.home.work.JWT.work.data.intf.UserDetailInterface;
 
 @RestController
-@RequestMapping("/home")
+@RequestMapping("/home") // if login prompted default id is user and the password look in logs
 public class HomeController {
 	@Autowired
-	private UserInterface user;
+	private UserDetailInterface userDetail;
 	
-
-	@RequestMapping(value = "/user/save", method = RequestMethod.GET)
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+ 
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/user/signup", method = RequestMethod.GET)
 	@ResponseBody
 	public String saveUserData()
 	
 	{
-		user.save(new User("Rajeevan","Vazhakolil","vrrajeevan"));
+		userDetail.save(new UserInfo("Rajeevan","Vazhakolil","vrrajeevan",bCryptPasswordEncoder.encode("rajeevan")));// firstname,lastname,username,pwd
 		return "saved";
 	}
 	
-	@RequestMapping(value = "/user/get", method = RequestMethod.GET)
+	
+	
+	/* 
+	 * User below url to login and get jwt token
+	 * 
+	 *  POST http://localhost:8080/login?username=vrrajeevan&password=rajeevan
+	 *  
+	 *  use the token received from above url and make below requests to get access
+	 */
+	
+	
+	@RequestMapping(value = "/user/getUserData", method = RequestMethod.GET)
 	@ResponseBody
-	public User getUserData()
+	public UserInfo getUserData()
 	{
-		return user.findByUserId("vrrajeevan");
+		return userDetail.findByUsername("vrrajeevan");
 	}
 	
 	

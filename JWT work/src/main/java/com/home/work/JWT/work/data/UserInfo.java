@@ -18,25 +18,29 @@ import lombok.Setter;
 @AllArgsConstructor  
 @Entity
 @Table(name = "User")
-public class User {
+public class UserInfo {
 	 @Id
 	  @GeneratedValue
 	  @Column(name="id")
 	private Long id;
-	 @Column(name="firstName")
+	 @Column(name="firstname")
 	private String firstName;
-	 @Column(name="lastName")
+	 @Column(name="lastname")
 	private String lastName;
     
-	 @Column(name="userId")
-	private String userId;
+	 @Column(name="username")
+	private String username;
 	    
-	public User(){}
+	 @Column(name="password")
+		private String password;
+	public UserInfo(){}
 
-	public User(String firstName, String lastName, String userId) {
+	public UserInfo(String firstName, String lastName, String username, String password) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.userId = userId;
+		this.username = username;
+		this.password = password;
+		
 	}
 }
