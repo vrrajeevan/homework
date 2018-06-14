@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jwtworkdeployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jwtworkappname
+        tier: backend
+        track: stabel
+    spec:
+      containers:
+        - name: jwtworkcontainer
+          image: jwtworkdocker:1
+          ports:
+            - name: rails
+              containerPort: 8080
+          env:
+            - name: spring_profile_active
+              value: test
+              
+            - name: testProperty1
+              value: testjwt11
+              
+            - name: testProperty2
+              value: testjwt21
+              
+            - name: testPropertyspl2
+              value: testjwtspl21
+              
+              
+              
