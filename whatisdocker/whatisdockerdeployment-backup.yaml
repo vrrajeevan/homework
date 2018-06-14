@@ -20,3 +20,10 @@ spec:
           env:
             - name: spring_profile_active
               value: test
+              
+            - name: testProperty1
+              value: test1
+              
+            - name: testProperty2
+              value: test2
+                         
