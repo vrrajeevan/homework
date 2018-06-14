@@ -16,7 +16,7 @@ spec:
           image: whatisdocker:1
           ports:
             - name: rails
-              containerPort: 3000
+              containerPort: 8080
           env:
             - name: spring_profile_active
               value: test
