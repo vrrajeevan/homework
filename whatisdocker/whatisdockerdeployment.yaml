@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: whatisdockerdeployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: whatisdocker
+        tier: backend
+        track: stabel
+    spec:
+      containers:
+        - name: whatisdockercontainer
+          image: whatisdocker:1
+          ports:
+            - name: rails
+              containerPort: 3000
+          env:
+            - name: spring_profile_active
+              value: test
